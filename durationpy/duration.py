@@ -2,6 +2,7 @@
 
 import re
 import datetime
+import pandas
 
 _nanosecond_size  = 1
 _microsecond_size = 1000 * _nanosecond_size
@@ -54,8 +55,8 @@ def from_str(duration):
             raise Exception(
                 "Invalid value {} in duration {}".format(value, duration))
 
-    microseconds = total / _microsecond_size
-    return datetime.timedelta(microseconds=sign * microseconds)
+    nanoseconds = total / _nanosecond_size
+    return pandas.Timedelta(nanoseconds=sign * nanoseconds)
 
 def to_str(delta, extended=False):
     """Format a datetime.timedelta to a duration string"""
